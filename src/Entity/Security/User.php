@@ -10,10 +10,12 @@ use Doctrine\ORM\Mapping\Entity;
 use Doctrine\ORM\Mapping\GeneratedValue;
 use Doctrine\ORM\Mapping\Id;
 use Doctrine\ORM\Mapping\Table;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 #[Entity(repositoryClass: UserRepository::class)]
 #[Table(name: 'app_user')]
-class User
+class User implements PasswordAuthenticatedUserInterface, UserInterface
 {
     #[Id]
     #[Column(type: 'string', length: 128)]
@@ -87,5 +89,29 @@ class User
     public function setPlainPassword(?string $plainPassword): void
     {
         $this->plainPassword = $plainPassword;
+    }
+
+    public function getRoles(): array
+    {
+        $roles = ['ROLE_USER'];
+
+        $additionalRoles = match ($this->role) {
+            UserRole::ADMIN => ['ROLE_ADMIN'],
+            UserRole::SET_MANAGER => ['ROLE_SET_MANAGER'],
+            UserRole::CREATOR => ['ROLE_CREATOR'],
+            default => [],
+        };
+
+        return array_merge($roles, $additionalRoles);
+    }
+
+    public function eraseCredentials(): void
+    {
+        $this->plainPassword = null;
+    }
+
+    public function getUserIdentifier(): string
+    {
+        return $this->email;
     }
 }
