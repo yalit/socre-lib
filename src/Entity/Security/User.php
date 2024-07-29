@@ -2,6 +2,7 @@
 
 namespace App\Entity\Security;
 
+use App\Doctrine\Generator\DoctrineStringUUIDGenerator;
 use App\Entity\Security\Enum\UserRole;
 use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping\Column;
@@ -19,7 +20,8 @@ class User implements PasswordAuthenticatedUserInterface, UserInterface
 {
     #[Id]
     #[Column(type: 'string', length: 128)]
-    #[GeneratedValue()]
+    #[GeneratedValue('CUSTOM')]
+    #[CustomIdGenerator(class: DoctrineStringUUIDGenerator::class)]
     private ?string $id = null;
 
     #[Column(type: 'string', length: 128)]
@@ -97,8 +99,6 @@ class User implements PasswordAuthenticatedUserInterface, UserInterface
 
         $additionalRoles = match ($this->role) {
             UserRole::ADMIN => ['ROLE_ADMIN'],
-            UserRole::SET_MANAGER => ['ROLE_SET_MANAGER'],
-            UserRole::CREATOR => ['ROLE_CREATOR'],
             default => [],
         };
 
