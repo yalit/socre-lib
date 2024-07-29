@@ -76,10 +76,7 @@ db-create: db-drop ## Create the database
 db-drop: ## Drop the database
 	${CONSOLE} doctrine:database:drop --force --env=dev
 
-db-update: ## Update the database
-	${CONSOLE} doctrine:schema:update --force --env=dev
-
-fixtures: db-create db-update ## Load fixtures into the database
+fixtures: db-create migrate ## Load fixtures into the database
 	${CONSOLE} doctrine:fixtures:load --no-interaction --env=dev
 
 migration: ## Create a new migration

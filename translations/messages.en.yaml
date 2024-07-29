@@ -1,0 +1,6 @@
+entity:
+  artist:
+    type:
+      composer: "Composer"
+      lyricist: "Lyricist"
+      other: "Other"

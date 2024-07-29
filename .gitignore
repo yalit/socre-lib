@@ -33,3 +33,7 @@ docker/mysql/
 npm-debug.log
 yarn-error.log
 ###< symfony/webpack-encore-bundle ###
+
+###> Application ###
+/public/uploads/score/*
+###< Application ###
