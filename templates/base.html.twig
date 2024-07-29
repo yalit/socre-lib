@@ -1,15 +1,13 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>{% block title %}Welcome!{% endblock %}</title>
     {% block stylesheets %}
-            {{ encore_entry_link_tags('app') }}
         {{ encore_entry_link_tags('app') }}
     {% endblock %}
 
     {% block javascripts %}
-            {{ encore_entry_script_tags('app') }}
         {{ encore_entry_script_tags('app') }}
     {% endblock %}
 </head>
@@ -28,7 +26,7 @@
             #}
             <div class="nav__menu flex flex-col font-bold gap-3">
                 <div class="font-light text-sm">MENU</div>
-                <a href="{{ path('index') }}" class="nav__menu__item">
+                <a href="{{ path('app_index') }}" class="nav__menu__item">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                          stroke="currentColor" class="w-6 h-6">
                         <path stroke-linecap="round" stroke-linejoin="round"
