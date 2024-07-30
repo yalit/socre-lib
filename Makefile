@@ -61,14 +61,17 @@ front-require: ## Require a new package
 front-require-dev: ## Require a new package
 	${FRONT_EXEC} install --save-dev $(filter-out $@,$(MAKECMDGOALS))
 
-front-build-dev: ## Build the assets in dev mode
+front-build-dev: front-dump-routes ## Build the assets in dev mode
 	${FRONT_EXEC} run dev
 
-front-watch: ## Watch the assets
+front-watch: front-dump-routes ## Watch the assets
 	${FRONT_EXEC} run watch
 
-front-build-prod: ## Build the assets in prod mode
+front-build-prod: front-dump-routes ## Build the assets in prod mode
 	${FRONT_EXEC} run build
+
+front-dump-routes: ## Dump the routes
+	${CONSOLE} fos:js-routing:dump --format=json --target=public/routes/fos_js_routes.json
 ## —— Doctrine ————————————————————————————————————————————————————————————
 db-create: db-drop ## Create the database
 	${CONSOLE} doctrine:database:create --env=dev
