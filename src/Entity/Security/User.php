@@ -2,9 +2,13 @@
 
 namespace App\Entity\Security;
 
+use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\Get;
 use App\Doctrine\Generator\DoctrineStringUUIDGenerator;
 use App\Entity\Security\Enum\UserRole;
 use App\Repository\Security\UserRepository;
+use App\Security\API\DTO\UserInformation;
+use App\Security\API\Provider\CurrentUserProvider;
 use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\CustomIdGenerator;
 use Doctrine\ORM\Mapping\Entity;
@@ -16,6 +20,15 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 #[Entity(repositoryClass: UserRepository::class)]
 #[Table(name: 'app_user')]
+#[ApiResource(
+    operations: [
+        new Get(
+            uriTemplate: '/users/current',
+            output: UserInformation::class,
+            provider: CurrentUserProvider::class
+        )
+    ]
+)]
 class User implements PasswordAuthenticatedUserInterface, UserInterface
 {
     #[Id]
