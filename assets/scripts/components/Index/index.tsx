@@ -1,4 +1,15 @@
+import {useState} from "react";
+import {useQuery} from "react-query";
+import ScoreRepository from "../../repository/score/score.repository";
+import UserRepository from "../../repository/session/user.repository";
+import {Score} from "../../interfaces/score/score.interface";
+import IndexScoreTableLine from "./indexScoreTableLine";
+
 export default function Index() {
+    const { data: latestScores, isError, isLoading } = useQuery<Score[]>(
+        'latestScores',
+        () => ScoreRepository.getLatest(),
+    );
 
     return (
         <>
@@ -50,86 +61,25 @@ export default function Index() {
                 </div>
             </div>
 
-            <div className="latest_scores card w-full p-6 mt-6">
+            <div className="latest_scores card w-full mt-6">
                 <div className="card__title">Latest scores</div>
                 <div className="card__content">
                     <div className="data__table">
                         <div className="data__table__header flex items-center">
                             <div className="data__table__header_cell w-3/12 lg:w-2/12">Name</div>
                             <div className="data__table__header_cell w-2/12">Cote</div>
-                            <div className="data__table__header_cell w-4/12">Categories</div>
-                            <div className="data__table__header_cell w-2/12">Composer</div>
+                            <div className="data__table__header_cell w-3/12">Categories</div>
+                            <div className="data__table__header_cell w-3/12">Composer</div>
                             <div className="data__table__header_cell flex-1"></div>
                         </div>
-
-                        <div className="data__table__line flex items-top odd">
-                            <div className="data__table__cell w-3/12 lg:w-2/12">Ne rentrez pas chez vous comme avant</div>
-                            <div className="data__table__cell w-2/12 ">
-                                <span className="bubble">N-203</span>
-                                <span className="bubble">@243</span>
-                            </div>
-                            <div className="data__table__cell w-4/12 ">
-                                <span className="bubble">Sortie</span>
-                                <span className="bubble">Pentecôte</span>
-                                <span className="bubble">Esprit Saint</span>
-                            </div>
-                            <div className="data__table__cell w-2/12">L. Fagnant</div>
-                            <div className="data__table__cell flex-1">
-                                <span className="action">View</span>
-                                <span className="action">Edit</span>
-                                <span className="action">Delete</span>
-                            </div>
-                        </div>
-
-                        <div className="data__table__line flex items-top even">
-                            <div className="data__table__cell w-3/12 lg:w-2/12">Gloire à Dieu</div>
-                            <div className="data__table__cell w-2/12 ">
-                                <span className="bubble">A-130</span>
-                            </div>
-                            <div className="data__table__cell w-4/12 ">
-                                <span className="bubble">Gloria</span>
-                            </div>
-                            <div className="data__table__cell w-2/12">M. Wackenheim</div>
-                            <div className="data__table__cell flex-1">
-                                <span className="action">View</span>
-                                <span className="action">Edit</span>
-                                <span className="action">Delete</span>
-                            </div>
-                        </div>
-
-                        <div className="data__table__line flex items-top odd">
-                            <div className="data__table__cell w-3/12 lg:w-2/12">Jésus le Christ</div>
-                            <div className="data__table__cell w-2/12 ">
-                                <span className="bubble">Taizé-112</span>
-                                <span className="bubble">@123</span>
-                            </div>
-                            <div className="data__table__cell w-4/12 ">
-                                <span className="bubble">P.U.</span>
-                                <span className="bubble">Refrain</span>
-                                <span className="bubble">Taizé</span>
-                            </div>
-                            <div className="data__table__cell w-3/12 lg:w-2/12">Taizé</div>
-                            <div className="data__table__cell flex-1">
-                                <span className="action">View</span>
-                                <span className="action">Edit</span>
-                                <span className="action">Delete</span>
-                            </div>
-                        </div>
-
-                        <div className="data__table__line flex items-top even">
-                            <div className="data__table__cell w-2/12">Je reviens vers Toi</div>
-                            <div className="data__table__cell w-2/12 "></div>
-                            <div className="data__table__cell w-4/12 ">
-                                <span className="bubble">Kyrie</span>
-                                <span className="bubble">Louange</span>
-                            </div>
-                            <div className="data__table__cell w-2/12">Glorious</div>
-                            <div className="data__table__cell flex-1">
-                                <span className="action">View</span>
-                                <span className="action">Edit</span>
-                                <span className="action">Delete</span>
-                            </div>
-                        </div>
+                        {isLoading &&
+                            <IndexScoreTableLine score={null} />
+                        }
+                        {latestScores && (
+                            latestScores.map((score, k) => (
+                                <IndexScoreTableLine score={score} odd={k % 2 === 0} />
+                            ))
+                        )}
                     </div>
                 </div>
             </div>

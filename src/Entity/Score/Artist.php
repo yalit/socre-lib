@@ -2,12 +2,16 @@
 
 namespace App\Entity\Score;
 
+use ApiPlatform\Metadata\ApiProperty;
+use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\GetCollection;
 use App\Doctrine\Generator\DoctrineStringUUIDGenerator;
 use App\Entity\Score\Enum\ArtistType;
 use App\Repository\Score\ArtistRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Attribute\Groups;
 
 #[ORM\Entity(repositoryClass: ArtistRepository::class)]
 class Artist
@@ -16,12 +20,15 @@ class Artist
     #[ORM\GeneratedValue('CUSTOM')]
     #[ORM\CustomIdGenerator(class: DoctrineStringUUIDGenerator::class)]
     #[ORM\Column]
+    #[Groups([Score::GROUP_READ])]
     private ?string $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups([Score::GROUP_READ])]
     private ?string $name = null;
 
     #[ORM\Column(length: 255, enumType: ArtistType::class)]
+    #[Groups([Score::GROUP_READ])]
     private ArtistType $type;
 
     /**

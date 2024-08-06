@@ -5,6 +5,7 @@ namespace App\Entity\Score;
 use App\Doctrine\Generator\DoctrineStringUUIDGenerator;
 use App\Repository\Score\ScoreReferenceRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Attribute\Groups;
 
 #[ORM\Entity(repositoryClass: ScoreReferenceRepository::class)]
 class ScoreReference
@@ -13,9 +14,11 @@ class ScoreReference
     #[ORM\GeneratedValue('CUSTOM')]
     #[ORM\CustomIdGenerator(class: DoctrineStringUUIDGenerator::class)]
     #[ORM\Column]
+    #[Groups([Score::GROUP_READ])]
     private ?string $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups([Score::GROUP_READ])]
     private ?string $value = null;
 
     #[ORM\ManyToOne(inversedBy: 'refs')]

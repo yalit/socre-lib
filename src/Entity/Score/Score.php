@@ -2,49 +2,68 @@
 
 namespace App\Entity\Score;
 
+use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\GetCollection;
 use App\Doctrine\Generator\DoctrineStringUUIDGenerator;
 use App\Repository\Score\ScoreRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Attribute\Groups;
 
 #[ORM\Entity(repositoryClass: ScoreRepository::class)]
+#[ApiResource(
+    operations: [
+        new GetCollection(
+            normalizationContext: ['groups' => [Score::GROUP_READ]]
+        )
+    ]
+)]
 class Score
 {
+    public const GROUP_READ = 'score:read';
+
     #[ORM\Id]
     #[ORM\GeneratedValue('CUSTOM')]
     #[ORM\CustomIdGenerator(class: DoctrineStringUUIDGenerator::class)]
     #[ORM\Column]
+    #[Groups([self::GROUP_READ])]
     private ?string $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups([self::GROUP_READ])]
     private ?string $title = null;
 
     #[ORM\Column(length: 1028, nullable: true)]
+    #[Groups([self::GROUP_READ])]
     private ?string $description = null;
 
     /**
      * @var Collection<int, ScoreReference>
      */
     #[ORM\OneToMany(targetEntity: ScoreReference::class, mappedBy: 'score', cascade: ['persist'], orphanRemoval: true)]
+    #[Groups([self::GROUP_READ])]
     private Collection $refs;
 
     /**
      * @var Collection<int, Artist>
      */
     #[ORM\ManyToMany(targetEntity: Artist::class, inversedBy: 'scores', cascade: ['persist'])]
+    #[Groups([self::GROUP_READ])]
     private Collection $artists;
 
     /**
      * @var Collection<int, ScoreCategory>
      */
     #[ORM\ManyToMany(targetEntity: ScoreCategory::class, inversedBy: 'scores', cascade: ['persist'])]
+    #[Groups([self::GROUP_READ])]
     private Collection $categories;
 
     /**
      * @var Collection<int, ScoreFile>
      */
     #[ORM\OneToMany(targetEntity: ScoreFile::class, mappedBy: 'score', cascade: ['persist'], orphanRemoval: true)]
+    #[Groups([self::GROUP_READ])]
     private Collection $files;
 
     public function __construct()

@@ -9,12 +9,12 @@ type RouteOptions = {
 }
 
 type mainRouteKey = keyof typeof API_ROUTES;
-type RouteKey = `${mainRouteKey}.${keyof typeof API_ROUTES[mainRouteKey]}`
+type routeKey<T extends mainRouteKey> = keyof typeof API_ROUTES[T]
 
 const apiRouter = {
-    generate: (route: RouteKey, params: RouteParams = {}, options: RouteOptions = {}) => {
-        let url = API_ROUTES[route.split('.')[0]][route.split('.')[1]];
-        Object.keys(params).forEach((key) => {
+    generate: (mainRoute: mainRouteKey, routeKey: routeKey<typeof mainRoute>, params: RouteParams = {}, options: RouteOptions = {}) => {
+        let url: string  = API_ROUTES[mainRoute][routeKey];
+        Object.keys(params).forEach((key: string ) => {
             url = url.replace(`{${key}}`, params[key].toString());
         });
 
