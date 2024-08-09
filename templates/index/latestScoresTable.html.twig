@@ -1,0 +1,39 @@
+<div class="data__table">
+    <div class="data__table__header flex items-center">
+        <div class="data__table__header_cell w-3/12 lg:w-2/12">Name</div>
+        <div class="data__table__header_cell w-2/12">Cote</div>
+        <div class="data__table__header_cell w-3/12">Categories</div>
+        <div class="data__table__header_cell w-3/12">Composer</div>
+        <div class="data__table__header_cell flex-1"></div>
+    </div>
+
+    {% for score in scores %}
+        {% set c = 'even' %}
+        {% if loop.index0 % 2 == 1 %}
+            {% set c = 'odd' %}
+        {% endif %}
+        <div class={{ "data__table__line #{c}" }}>
+            <div class="data__table__cell w-3/12 lg:w-2/12">{{ score.title }}</div>
+            <div class="data__table__cell w-2/12">
+                {% for ref in score.refs %}
+                    <span class="bubble">{{ref.value}}</span>
+                {% endfor %}
+            </div>
+            <div class="data__table__cell w-3/12 ">
+                {% for category in score.categories %}
+                    <span class="bubble">{{category.value}}</span>
+                {% endfor %}
+            </div>
+            <div class="data__table__cell w-3/12">
+                {% for artist in score.artists %}
+                    <span class="bubble">{{artist.name}}</span>
+                {% endfor %}
+            </div>
+            <div class="data__table__cell flex-1 justify-end">
+                <span class="action">View</span>
+                <span class="action">Edit</span>
+                <span class="action">Delete</span>
+            </div>
+        </div>
+    {% endfor %}
+</div>

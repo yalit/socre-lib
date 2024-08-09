@@ -26,31 +26,35 @@ nav {
 }
 
 .card {
-    @apply bg-white shadow p-6 relative rounded-sm;
+    @apply flex flex-col gap-4 bg-white shadow p-6 relative rounded-sm;
 
     .card__title {
-        @apply font-bold text-xl mb-4;
+        @apply flex justify-between items-center w-full gap-6;
+        .title__title {
+            @apply font-bold text-xl;
+        }
+
+        .title__subtitle {
+            @apply text-gray-600 text-lg;
+        }
     }
 
-    .card__subtitle {
-        @apply max-w-[75%] text-gray-600;
+    .card__content {
+        @apply flex-1;
     }
 
-    .card__action {
-        @apply absolute top-0 right-5 p-2 h-full flex flex-col gap-1 justify-center items-center cursor-pointer;
+    .card__footer {
 
+    }
+
+    .dashboard__card__action {
+        @apply w-full h-full flex flex-col justify-between items-center gap-2 cursor-pointer;
         &.add {
             @apply text-green-700;
         }
 
-        &.medium {
-            svg {
-                @apply w-10 h-10;
-            }
-        }
-
         span {
-            @apply font-bold text-sm;
+            @apply font-bold;
         }
     }
 }
@@ -79,9 +83,5 @@ nav {
 }
 
 .bubble {
-    @apply bg-gray-200 border-gray-500 text-gray-800 rounded-lg shadow py-1 px-2 mr-1;
-
-    &.green {
-        @apply bg-green-200 border-green-500;
-    }
+    @apply bg-gray-100 text-gray-800 rounded-sm py-1 px-2 mr-1;
 }

@@ -1,0 +1,18 @@
+{% import 'includes/svg/_svg.html.twig' as svg %}
+{% macro getCardTitle(title, subtitle) %}
+    <div class="title__title">{{ title }}</div><div class="title__subtitle">{{ subtitle }}</div>
+{% endmacro %}
+
+{% macro getCardIconContent(iconName, iconText, iconTarget, iconClassName = "") %}
+    <div class="dashboard__card__action add" href="{{ iconTarget }}">
+        {{ svg.getSvg(iconName, iconClassName) }}
+        <span>{{ iconText }}</span>
+    </div>
+    
+{% endmacro %}
+
+<div class="main__cards w-full grid grid-cols-2 gap-4 md:gap-6 md:grid-cols-2 lg:grid-cols-3 2xl:gap-7.5">
+    {{ include('includes/_card.html.twig', {'card_title': _self.getCardTitle("New score(s) this month", '10') }) }}
+    {{ include('includes/_card.html.twig', {'card_title': _self.getCardTitle("Scores in the library", '275'), 'card_content': _self.getCardIconContent('plus-file', "New score", path('app_index'), "h-10 w-10") }) }}
+    {{ include('includes/_card.html.twig', {'card_title': _self.getCardTitle("Set lists", '25'), 'card_content': _self.getCardIconContent('plus-folder', "New set list", path('app_index'), "h-10 w-10") }) }}
+</div>
