@@ -16,10 +16,10 @@ class ScoreRepository extends ServiceEntityRepository
         parent::__construct($registry, Score::class);
     }
 
-    public function getLatestScores(int $nb = 5): array
+    public function getLatestScores(int $nb = 5, string $orderBy = 'createdAt', bool $ascending = false): array
     {
         return $this->createQueryBuilder('s')
-            ->orderBy('s.createdAt', 'DESC')
+            ->orderBy(sprintf('s.%s', $orderBy), $ascending ? 'ASC' : 'DESC')
             ->setMaxResults($nb)
             ->getQuery()
             ->getResult();

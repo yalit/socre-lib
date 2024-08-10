@@ -1,9 +1,7 @@
 {# templates/login/index.html.twig #}
 {% extends 'base.html.twig' %}
 
-{% macro getTitle(title) %}
-    <div class="title__title">{{ title | trans }}</div>
-{% endmacro %}
+{% import 'includes/_card.html.twig' as card %}
 
 {% macro getLatestScores(scores) %}
     {{ include('index/latestScoresTable.html.twig', {'scores': scores}) }}
@@ -15,7 +13,7 @@
 
         {{ include('includes/_card.html.twig', {
             'card_class': "mt-6",
-            'card_title': _self.getTitle("index.scores.table.title.label"),
+            'card_title': card.getTitle("index.scores.table.title.label"),
             'card_content': _self.getLatestScores(latest_scores)
         }) }}
     </div>

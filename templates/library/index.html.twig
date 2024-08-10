@@ -1,9 +1,19 @@
 {% extends 'base.html.twig' %}
 
+{% import 'includes/_card.html.twig' as card %}
+
+{% macro getContent() %}
+    {{ component('Library:ScoreTable') }}
+{% endmacro %}
+
 {% block title %}Library{% endblock %}
 
 {% block body %}
     <div class="w-full p-4">
-        {{ include('includes/_card.html.twig', {'card_title': "Library"}) }}
+        {{ include('includes/_card.html.twig', {
+            'card_class': "mt-6",
+            'card_title': card.getTitle("index.scores.table.title.label"),
+            'card_content': _self.getContent()
+        }) }}
     </div>
 {% endblock %}
