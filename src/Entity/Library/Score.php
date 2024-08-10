@@ -37,12 +37,6 @@ class Score
     private Collection $refs;
 
     /**
-     * @var Collection<int, Artist>
-     */
-    #[ORM\ManyToMany(targetEntity: Artist::class, inversedBy: 'scores', cascade: ['persist'])]
-    private Collection $artists;
-
-    /**
      * @var Collection<int, ScoreCategory>
      */
     #[ORM\ManyToMany(targetEntity: ScoreCategory::class, inversedBy: 'scores', cascade: ['persist'])]
@@ -57,14 +51,20 @@ class Score
     #[ORM\Column(type: Types::DATETIME_IMMUTABLE, nullable: false)]
     private DateTimeImmutable $createdAt;
 
+    /**
+     * @var Collection<int, ScoreArtist>
+     */
+    #[ORM\OneToMany(targetEntity: ScoreArtist::class, mappedBy: 'score', cascade: ['persist'], orphanRemoval: true)]
+    private Collection $artists;
+
     public function __construct()
     {
         $this->refs = new ArrayCollection();
-        $this->artists = new ArrayCollection();
         $this->categories = new ArrayCollection();
         $this->files = new ArrayCollection();
 
         $this->createdAt = new DateTimeImmutable();
+        $this->artists = new ArrayCollection();
     }
 
     public function getId(): ?string
@@ -117,28 +117,7 @@ class Score
             }
         }
     }
-
-    /**
-     * @return Collection<int, Artist>
-     */
-    public function getArtists(): Collection
-    {
-        return $this->artists;
-    }
-
-    public function addArtist(Artist $artist): void
-    {
-        if (!$this->artists->contains($artist)) {
-            $this->artists->add($artist);
-            $artist->addScore($this);
-        }
-    }
-
-    public function removeArtist(Artist $artist): void
-    {
-        $this->artists->removeElement($artist);
-    }
-
+    
     /**
      * @return Collection<int, ScoreCategory>
      */
@@ -194,5 +173,35 @@ class Score
     public function setCreatedAt(DateTimeImmutable $createdAt): void
     {
         $this->createdAt = $createdAt;
+    }
+
+    /**
+     * @return Collection<int, ScoreArtist>
+     */
+    public function getArtists(): Collection
+    {
+        return $this->artists;
+    }
+
+    public function addArtist(ScoreArtist $artist): static
+    {
+        if (!$this->artists->contains($artist)) {
+            $this->artists->add($artist);
+            $artist->setScore($this);
+        }
+
+        return $this;
+    }
+
+    public function removeArtist(ScoreArtist $artist): static
+    {
+        if ($this->artists->removeElement($artist)) {
+            // set the owning side to null (unless already changed)
+            if ($artist->getScore() === $this) {
+                $artist->setScore(null);
+            }
+        }
+
+        return $this;
     }
 }

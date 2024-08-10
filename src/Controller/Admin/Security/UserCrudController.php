@@ -21,6 +21,15 @@ class UserCrudController extends AbstractCrudController
         return User::class;
     }
 
+    public function configureCrud(Crud $crud): Crud
+    {
+        return parent::configureCrud($crud)
+            ->setEntityLabelInSingular('entity.user.label.singular')
+            ->setEntityLabelInPlural('entity.user.label.plural')
+            ;
+
+    }
+
     public function configureActions(Actions $actions): Actions
     {
         return parent::configureActions($actions)
@@ -40,10 +49,10 @@ class UserCrudController extends AbstractCrudController
     {
         return [
             IdField::new('id')->hideOnForm(),
-            TextField::new('name'),
-            EmailField::new('email'),
-            TextField::new('plainPassword', 'Password')->hideOnIndex(),
-            EnumField::new('role')->setEnumClass(UserRole::class)
+            TextField::new('name', 'entity.user.fields.username.label'),
+            EmailField::new('email', 'entity.user.fields.email.label'),
+            TextField::new('plainPassword', 'entity.user.fields.plainPassword.label')->hideOnIndex(),
+            EnumField::new('role', 'entity.user.fields.role.label')->setEnumClass(UserRole::class)
         ];
     }
 }

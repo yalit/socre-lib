@@ -3,10 +3,11 @@
 namespace App\Controller\Admin\Library;
 
 use App\Entity\Library\Score;
-use App\Form\Library\ArtistFormType;
+use App\Form\Library\ScoreArtistFormType;
 use App\Form\Library\ScoreCategoryType;
 use App\Form\Library\ScoreFileType;
 use App\Form\Library\ScoreReferenceType;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\CollectionField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
@@ -19,28 +20,37 @@ class ScoreCrudController extends AbstractCrudController
         return Score::class;
     }
 
+    public function configureCrud(Crud $crud): Crud
+    {
+        return parent::configureCrud($crud)
+            ->setEntityLabelInSingular('entity.score.label.singular')
+            ->setEntityLabelInPlural('entity.score.label.plural')
+        ;
+
+    }
+
     public function configureFields(string $pageName): iterable
     {
         return [
             IdField::new('id')->hideOnForm(),
-            TextField::new('title'),
-            TextField::new('description'),
-            CollectionField::new('refs')
+            TextField::new('title', 'entity.score.fields.title.label'),
+            TextField::new('description', 'entity.score.fields.description.label'),
+            CollectionField::new('refs', 'entity.score.fields.refs.label')
                 ->allowAdd()
                 ->allowDelete()
                 ->setEntryType(ScoreReferenceType::class)
                 ->setFormTypeOption('by_reference', false),
-            CollectionField::new('artists')
+            CollectionField::new('artists', 'entity.score.fields.artists.label')
                 ->allowAdd()
                 ->allowDelete()
-                ->setEntryType(ArtistFormType::class)
+                ->setEntryType(ScoreArtistFormType::class)
                 ->setFormTypeOption('by_reference', false),
-            CollectionField::new('categories')
+            CollectionField::new('categories', 'entity.score.fields.categories.label')
                 ->allowAdd()
                 ->allowDelete()
                 ->setEntryType(ScoreCategoryType::class)
                 ->setFormTypeOption('by_reference', false),
-            CollectionField::new('files')
+            CollectionField::new('files', 'entity.score.fields.files.label')
                 ->allowAdd()
                 ->allowDelete()
                 ->setEntryType(ScoreFileType::class)

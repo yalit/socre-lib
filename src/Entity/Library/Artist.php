@@ -27,14 +27,10 @@ class Artist
     #[Groups([Score::GROUP_READ])]
     private ?string $name = null;
 
-    #[ORM\Column(length: 255, enumType: ArtistType::class)]
-    #[Groups([Score::GROUP_READ])]
-    private ArtistType $type;
-
     /**
-     * @var Collection<int, Score>
+     * @var Collection<int, ScoreArtist>
      */
-    #[ORM\ManyToMany(targetEntity: Score::class, mappedBy: 'artists')]
+    #[ORM\OneToMany(targetEntity: ScoreArtist::class, mappedBy: 'artist', orphanRemoval: true)]
     private Collection $scores;
 
     public function __construct()
@@ -62,37 +58,31 @@ class Artist
         $this->name = $name;
     }
 
-    public function getType():ArtistType
-    {
-        return $this->type;
-    }
-
-    public function setType(ArtistType $type): void
-    {
-        $this->type = $type;
-    }
-
     /**
-     * @return Collection<int, Score>
+     * @return Collection<int, ScoreArtist>
      */
     public function getScores(): Collection
     {
         return $this->scores;
     }
 
-    public function addScore(Score $score): static
+    public function addScore(ScoreArtist $score): static
     {
         if (!$this->scores->contains($score)) {
             $this->scores->add($score);
+            $score->setArtist($this);
         }
 
         return $this;
     }
 
-    public function removeScore(Score $score): static
+    public function removeScore(ScoreArtist $score): static
     {
         if ($this->scores->removeElement($score)) {
-            $score->removeArtist($this);
+            // set the owning side to null (unless already changed)
+            if ($score->getArtist() === $this) {
+                $score->setArtist(null);
+            }
         }
 
         return $this;

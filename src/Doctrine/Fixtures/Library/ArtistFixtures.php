@@ -15,15 +15,7 @@ class ArtistFixtures extends Fixture
     {
         for ($i = 1; $i <= 10; $i++) {
             $artist = new Artist();
-
-            $type = match ($i) {
-                1, 2, 3 => ArtistType::COMPOSER,
-                4, 5, 6 => ArtistType::LYRICIST,
-                7, 8, 9, 10 => ArtistType::OTHER
-            };
-            $artist->setName(sprintf('Artist - %s - %d', $type->name, $i));
-            $artist->setType($type);
-
+            $artist->setName(sprintf('Artist - %d', $i));
             $manager->persist($artist);
             $this->addReference(sprintf(self::ARTIST_REFERENCE, $i), $artist);
         }

@@ -107,6 +107,7 @@ tests-infrastructure: ## Launch the infrastructure tests
 
 tests-application: ## Launch the application tests
 	${DOCKER_EXEC} bin/phpunit --testsuite=Application
+
 ## —— Static analysis ————————————————————————————————————————————————————————————
 analyze: phpstan php-cs-fixer ## Launch PHPStan and PHP-CS-Fixer
 	${CONSOLE} lint:yaml config --parse-tags
@@ -126,3 +127,6 @@ serve: ## Start the Symfony server
 
 console: ## Access the Symfony console
 	${CONSOLE} $(filter-out $@,$(MAKECMDGOALS))
+
+clear-cache: ## Clear the cache
+	${CONSOLE} cache:clear

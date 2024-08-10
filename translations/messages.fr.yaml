@@ -1,0 +1,36 @@
+entity:
+  artist:
+    type:
+      composer: "Compositeur"
+      lyricist: "Parolier"
+      other: "Autre"
+  user:
+    label:
+      singular: "Utilisateur"
+      plural: "Utilisateurs"
+    fields:
+      username:
+        label: "Nom d'utilisateur"
+      email:
+        label: "Adresse email"
+      plainPassword:
+        label: "Mot de passe"
+      role:
+        label: "Rôle"
+  score:
+    label:
+      singular: "Partition"
+      plural: "Partitions"
+    fields:
+      title:
+        label: "Titre"
+      description:
+        label: "Description"
+      refs:
+        label: "Références"
+      artists:
+        label: "Artistes"
+      categories:
+        label: "Catégories"
+      files:
+        label: "Fichiers"
