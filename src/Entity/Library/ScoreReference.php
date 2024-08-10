@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Entity\Score;
+namespace App\Entity\Library;
 
 use App\Doctrine\Generator\DoctrineStringUUIDGenerator;
-use App\Repository\Score\ScoreReferenceRepository;
+use App\Repository\Library\ScoreReferenceRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Attribute\Groups;
 

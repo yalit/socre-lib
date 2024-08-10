@@ -1,13 +1,15 @@
 <?php
 
-namespace App\Entity\Score;
+namespace App\Entity\Library;
 
 use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\GetCollection;
 use App\Doctrine\Generator\DoctrineStringUUIDGenerator;
-use App\Repository\Score\ScoreRepository;
+use App\Repository\Library\ScoreRepository;
+use DateTimeImmutable;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Attribute\Groups;
 
@@ -52,12 +54,17 @@ class Score
     #[ORM\OneToMany(targetEntity: ScoreFile::class, mappedBy: 'score', cascade: ['persist'], orphanRemoval: true)]
     private Collection $files;
 
+    #[ORM\Column(type: Types::DATETIME_IMMUTABLE, nullable: false)]
+    private DateTimeImmutable $createdAt;
+
     public function __construct()
     {
         $this->refs = new ArrayCollection();
         $this->artists = new ArrayCollection();
         $this->categories = new ArrayCollection();
         $this->files = new ArrayCollection();
+
+        $this->createdAt = new DateTimeImmutable();
     }
 
     public function getId(): ?string
@@ -177,5 +184,15 @@ class Score
                 $file->setScore(null);
             }
         }
+    }
+
+    public function getCreatedAt(): DateTimeImmutable
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt(DateTimeImmutable $createdAt): void
+    {
+        $this->createdAt = $createdAt;
     }
 }

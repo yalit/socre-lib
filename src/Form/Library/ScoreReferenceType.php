@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Form\Score;
+namespace App\Form\Library;
 
-use App\Entity\Score\Score;
-use App\Entity\Score\ScoreReference;
+use App\Entity\Library\Score;
+use App\Entity\Library\ScoreReference;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;

@@ -1,9 +1,9 @@
 <?php
 
-namespace DataFixtures\Score;
+namespace DataFixtures\Library;
 
-use App\Entity\Score\Score;
-use App\Entity\Score\ScoreReference;
+use App\Entity\Library\Score;
+use App\Entity\Library\ScoreReference;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;

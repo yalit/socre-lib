@@ -2,7 +2,7 @@
 
 namespace App\Security\Factory;
 
-use App\Entity\Score\ScoreFile;
+use App\Entity\Library\ScoreFile;
 use SplFileInfo;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Uid\Uuid;

@@ -1,9 +1,9 @@
 <?php
 
-namespace DataFixtures\Score;
+namespace DataFixtures\Library;
 
-use App\Entity\Score\Artist;
-use App\Entity\Score\Enum\ArtistType;
+use App\Entity\Library\Artist;
+use App\Entity\Library\Enum\ArtistType;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 

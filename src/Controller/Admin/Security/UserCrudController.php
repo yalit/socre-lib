@@ -3,9 +3,9 @@
 namespace App\Controller\Admin\Security;
 
 use App\Admin\Field\EnumField;
-use App\Controller\Voter\AbstractCrudVoter;
 use App\Entity\Security\Enum\UserRole;
 use App\Entity\Security\User;
+use App\Voter\AbstractCrudVoter;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;

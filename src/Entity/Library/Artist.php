@@ -1,16 +1,20 @@
 <?php
 
-namespace App\Entity\Score;
+namespace App\Entity\Library;
 
+use ApiPlatform\Metadata\ApiProperty;
+use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\GetCollection;
 use App\Doctrine\Generator\DoctrineStringUUIDGenerator;
-use App\Repository\Score\ScoreCategoryRepository;
+use App\Entity\Library\Enum\ArtistType;
+use App\Repository\Library\ArtistRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Attribute\Groups;
 
-#[ORM\Entity(repositoryClass: ScoreCategoryRepository::class)]
-class ScoreCategory
+#[ORM\Entity(repositoryClass: ArtistRepository::class)]
+class Artist
 {
     #[ORM\Id]
     #[ORM\GeneratedValue('CUSTOM')]
@@ -21,16 +25,16 @@ class ScoreCategory
 
     #[ORM\Column(length: 255)]
     #[Groups([Score::GROUP_READ])]
-    private ?string $value = null;
+    private ?string $name = null;
 
-    #[ORM\Column(length: 1028, nullable: true)]
+    #[ORM\Column(length: 255, enumType: ArtistType::class)]
     #[Groups([Score::GROUP_READ])]
-    private ?string $description = null;
+    private ArtistType $type;
 
     /**
      * @var Collection<int, Score>
      */
-    #[ORM\ManyToMany(targetEntity: Score::class, mappedBy: 'categories')]
+    #[ORM\ManyToMany(targetEntity: Score::class, mappedBy: 'artists')]
     private Collection $scores;
 
     public function __construct()
@@ -40,7 +44,7 @@ class ScoreCategory
 
     public function __toString(): string
     {
-        return $this->value;
+        return $this->name;
     }
 
     public function getId(): ?string
@@ -48,24 +52,24 @@ class ScoreCategory
         return $this->id;
     }
 
-    public function getValue(): ?string
+    public function getName(): ?string
     {
-        return $this->value;
+        return $this->name;
     }
 
-    public function setValue(string $value): void
+    public function setName(string $name): void
     {
-        $this->value = $value;
+        $this->name = $name;
     }
 
-    public function getDescription(): ?string
+    public function getType():ArtistType
     {
-        return $this->description;
+        return $this->type;
     }
 
-    public function setDescription(?string $description): void
+    public function setType(ArtistType $type): void
     {
-        $this->description = $description;
+        $this->type = $type;
     }
 
     /**
@@ -88,7 +92,7 @@ class ScoreCategory
     public function removeScore(Score $score): static
     {
         if ($this->scores->removeElement($score)) {
-            $score->removeCategory($this);
+            $score->removeArtist($this);
         }
 
         return $this;

@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Entity\Score;
+namespace App\Entity\Library;
 
 use App\Doctrine\Generator\DoctrineStringUUIDGenerator;
-use App\Repository\Score\ScoreFileRepository;
+use App\Repository\Library\ScoreFileRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\CustomIdGenerator;
 use Symfony\Component\HttpFoundation\File\UploadedFile;

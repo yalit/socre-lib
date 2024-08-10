@@ -1,12 +1,11 @@
 <?php
 
-namespace App\Controller\Voter\Security;
+namespace App\Voter\Security;
 
-use App\Controller\Voter\AbstractCrudVoter;
 use App\Entity\Security\Enum\UserRole;
 use App\Entity\Security\User;
+use App\Voter\AbstractCrudVoter;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
-use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * User CRUD voter.

@@ -3,7 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Controller\Admin\Security\UserCrudController;
-use App\Entity\Score\Score;
+use App\Entity\Library\Score;
 use App\Entity\Security\User;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;

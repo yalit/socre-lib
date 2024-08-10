@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Controller\Admin\Score;
+namespace App\Controller\Admin\Library;
 
-use App\Entity\Score\Score;
-use App\Form\Score\ArtistFormType;
-use App\Form\Score\ScoreCategoryType;
-use App\Form\Score\ScoreFileType;
-use App\Form\Score\ScoreReferenceType;
+use App\Entity\Library\Score;
+use App\Form\Library\ArtistFormType;
+use App\Form\Library\ScoreCategoryType;
+use App\Form\Library\ScoreFileType;
+use App\Form\Library\ScoreReferenceType;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\CollectionField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;

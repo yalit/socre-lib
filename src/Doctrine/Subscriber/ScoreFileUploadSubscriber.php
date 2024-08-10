@@ -2,7 +2,7 @@
 
 namespace App\Doctrine\Subscriber;
 
-use App\Entity\Score\ScoreFile;
+use App\Entity\Library\ScoreFile;
 use App\Security\Factory\ScoreFileFactory;
 use Doctrine\Bundle\DoctrineBundle\Attribute\AsDoctrineListener;
 use Doctrine\ORM\Event\PrePersistEventArgs;

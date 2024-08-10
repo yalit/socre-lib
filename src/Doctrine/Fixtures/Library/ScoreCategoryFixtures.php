@@ -1,8 +1,8 @@
 <?php
 
-namespace DataFixtures\Score;
+namespace DataFixtures\Library;
 
-use App\Entity\Score\ScoreCategory;
+use App\Entity\Library\ScoreCategory;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 

@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Repository\Score;
+namespace App\Repository\Library;
 
-use App\Entity\Score\Score;
+use App\Entity\Library\Score;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -16,10 +16,11 @@ class ScoreRepository extends ServiceEntityRepository
         parent::__construct($registry, Score::class);
     }
 
-    public function getLatestScores(): array
+    public function getLatestScores(int $nb = 5): array
     {
         return $this->createQueryBuilder('s')
-            ->setMaxResults(10)
+            ->orderBy('s.createdAt', 'DESC')
+            ->setMaxResults($nb)
             ->getQuery()
             ->getResult();
     }

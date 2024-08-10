@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Entity\Score\Enum;
+namespace App\Entity\Library\Enum;
 
 enum ArtistType: string
 {
