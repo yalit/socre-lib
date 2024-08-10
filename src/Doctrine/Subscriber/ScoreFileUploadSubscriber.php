@@ -3,7 +3,7 @@
 namespace App\Doctrine\Subscriber;
 
 use App\Entity\Library\ScoreFile;
-use App\Security\Factory\ScoreFileFactory;
+use App\Library\Factory\ScoreFileFactory;
 use Doctrine\Bundle\DoctrineBundle\Attribute\AsDoctrineListener;
 use Doctrine\ORM\Event\PrePersistEventArgs;
 use Doctrine\ORM\Event\PreRemoveEventArgs;

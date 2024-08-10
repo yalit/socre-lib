@@ -1,9 +1,8 @@
 <?php
 
-namespace App\Security\Factory;
+namespace App\Library\Factory;
 
 use App\Entity\Library\ScoreFile;
-use SplFileInfo;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Uid\Uuid;
 

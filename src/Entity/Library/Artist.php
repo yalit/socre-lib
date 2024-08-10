@@ -2,9 +2,6 @@
 
 namespace App\Entity\Library;
 
-use ApiPlatform\Metadata\ApiProperty;
-use ApiPlatform\Metadata\ApiResource;
-use ApiPlatform\Metadata\GetCollection;
 use App\Doctrine\Generator\DoctrineStringUUIDGenerator;
 use App\Entity\Library\Enum\ArtistType;
 use App\Repository\Library\ArtistRepository;
@@ -20,11 +17,9 @@ class Artist
     #[ORM\GeneratedValue('CUSTOM')]
     #[ORM\CustomIdGenerator(class: DoctrineStringUUIDGenerator::class)]
     #[ORM\Column]
-    #[Groups([Score::GROUP_READ])]
     private ?string $id = null;
 
     #[ORM\Column(length: 255)]
-    #[Groups([Score::GROUP_READ])]
     private ?string $name = null;
 
     /**

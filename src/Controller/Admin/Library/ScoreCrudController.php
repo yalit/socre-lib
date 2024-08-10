@@ -3,10 +3,10 @@
 namespace App\Controller\Admin\Library;
 
 use App\Entity\Library\Score;
-use App\Form\Library\ScoreArtistFormType;
-use App\Form\Library\ScoreCategoryType;
-use App\Form\Library\ScoreFileType;
-use App\Form\Library\ScoreReferenceType;
+use App\Library\Form\ScoreArtistFormType;
+use App\Library\Form\ScoreCategoryType;
+use App\Library\Form\ScoreFileType;
+use App\Library\Form\ScoreReferenceType;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\CollectionField;

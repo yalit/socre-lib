@@ -1,10 +1,9 @@
 <?php
 
-namespace App\Form\Library;
+namespace App\Library\Form;
 
 use App\Entity\Library\Artist;
 use App\Entity\Library\Enum\ArtistType;
-use App\Entity\Library\Score;
 use App\Entity\Library\ScoreArtist;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
