@@ -1,3 +1,37 @@
+main:
+  title:
+    label: "Partothèque"
+  searchbar:
+    placeholder: "Rechercher"
+
+  menu:
+    home:
+      label: "Accueil"
+    library:
+      label: "Partothèque"
+    setlists:
+      label: "Listes de morceaux"
+    admin:
+      label: "Admin"
+    login:
+      label: "Connexion"
+    logout:
+      label: "Déconnexion"
+
+  action:
+    view:
+      label: "Consulter"
+    add:
+      label: "Ajouter"
+    edit:
+      label: "Modifier"
+    delete:
+      label: "Supprimer"
+    save:
+      label: "Enregistrer"
+    cancel:
+      label: "Annuler"
+
 entity:
   artist:
     type:
@@ -34,3 +68,31 @@ entity:
         label: "Catégories"
       files:
         label: "Fichiers"
+
+index:
+  cards:
+    newscores:
+        title: "Nouvelles partitions"
+    libraryscores:
+        title: "Partitions de la bibliothèque"
+        icon:
+          action:
+            label: "Nouvelle partition"
+    setlists:
+        title: "Listes de morceaux"
+        icon:
+          action:
+            label: "Nouvelle liste"
+  scores:
+    table:
+      title:
+        label: 'Dernières partitions'
+      header:
+        name:
+          label: 'Titre'
+        references:
+          label: 'Référence(s)'
+        categories:
+          label: 'Catégorie(s)'
+        artists:
+          label: 'Artiste(s)'

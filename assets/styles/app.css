@@ -77,6 +77,13 @@ nav {
 
         .data__table__cell {
             @apply px-2 flex items-center gap-2 flex-wrap;
+
+            &.action__cell {
+                @apply items-end;
+                &>span, &>a, &>button {
+                    @apply cursor-pointer;
+                }
+            }
         }
     }
 
