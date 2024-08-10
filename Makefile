@@ -64,8 +64,11 @@ front-require-dev: ## Require a new package
 front-build-dev: front-dump-routes ## Build the assets in dev mode
 	${FRONT_EXEC} run dev
 
-front-watch: front-dump-routes ## Watch the assets
+front-watch: front-reset front-dump-routes ## Watch the assets
 	${FRONT_EXEC} run watch
+
+front-reset: ## Reset the assets
+	rm -rf public/build/*
 
 front-build-prod: front-dump-routes ## Build the assets in prod mode
 	${FRONT_EXEC} run build
